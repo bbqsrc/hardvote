@@ -1,0 +1,54 @@
+<poll xmlns="http://bbqsrc.net/xml/poll/0.1">
+	<settings>
+		<opening-date/>
+		<closing-date/>
+		<template-file/>
+		<user-file/>
+	</settings>
+
+	<content>
+		<section title="First Section">
+			<question type="multiple">
+				<text><![CDATA[How much <em>wood</em> would a woodchuck chuck if a woodchuck could chuck wood?]]></text>
+				<options>
+					<option>Less than 10</option>
+					<option>More than 10</option>
+					<option>10</option>
+				</options>
+			</question>
+			<question type="shorttext">
+				<text>What is your name?</text>
+			</question>
+			<question type="longtext">
+				<text>Write me an essay.</text>
+			</question>
+		</section>
+		<section title="Second Section">
+			<question type="gauge" min="0" max="10">
+				<text>I like rice</text>
+			</question>
+			<question type="gauge" min="0" max="10">
+				<text>I like other things too</text>
+			</question>
+			<question type="preference" method="schultz">
+				<text>Which of these fags do you want as president?</text>
+				<options>
+					<option>Some Guy</option>
+					<option>Another Guy</option>
+					<option>Last Guy</option>
+				</options>
+			</question>
+		</section>
+	</content>
+</poll>
+
+<!--
+<users>
+	<user>
+		<uuid>f66593b2-ade3-4983-9501-1fd19322c9f6</uuid>
+		<first-name>John</first-name>
+		<last-name>Smith</last-name>
+		<email>johnsmith@me.name</email>
+	</user>
+</users>
+-->
