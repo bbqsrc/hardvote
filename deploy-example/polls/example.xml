@@ -1,0 +1,52 @@
+<poll xmlns="http://bbqsrc.net/xml/poll/0.1">
+	<settings>
+		<id>example</id>
+		<title>Example Poll</title>
+		<!--<opening-date/>
+		<closing-date/>-->
+		<template-file>template.tpl</template-file>
+		<user-file>users.csv</user-file>
+	</settings>
+
+	<content>
+		<section title="First Section">
+			<question type="multiple" mode="required">
+				<text><![CDATA[How much <em>wood</em> would a woodchuck chuck if a woodchuck could chuck wood?]]></text>
+				<options>
+					<option>Less than 10</option>
+					<option>More than 10</option>
+					<option>10</option>
+				</options>
+			</question>
+			<question type="shorttext" mode="required">
+				<text>What is your name?</text>
+			</question>
+			<question type="longtext" mode="required">
+				<text>Write me an essay.</text>
+			</question>
+			<question type="multiple" mode="required">
+				<text>Do you support farts in public places?</text>
+				<options>
+					<option>True</option>
+					<option>False</option>
+				</options>
+			</question>
+		</section>
+		<section title="Second Section">
+			<question type="gauge" min="0" max="10" mode="required">
+				<text>I like rice. How much do you?</text>
+			</question>
+			<question type="gauge" min="0" max="10" mode="optional">
+				<text>I like other things too, do you?</text>
+			</question>
+			<question mode="required" type="preferential" method="schultz">
+				<text>Who is preferred?</text>
+				<options>
+					<option>Some Guy</option>
+					<option>Another Guy</option>
+					<option>Last Guy</option>
+				</options>
+			</question>
+		</section>
+	</content>
+</poll>

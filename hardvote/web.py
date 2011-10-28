@@ -27,9 +27,9 @@ class Handlers:
 		if node.attrib.get('mode') == "required":
 			label.append(etree.XML("<span class='asterisk'>*</span>"))
 			for input in div.getiterator("input"):
-				input.attrib['required'] = ''
+				input.attrib['required'] = 'required'
 			for input in div.getiterator("textarea"):
-				input.attrib['required'] = ''
+				input.attrib['required'] = 'required'
 
 		return div
 	

@@ -3,6 +3,8 @@ import csv
 import json
 import logging
 import re
+import os
+import os.path
 
 from dateutil.parser import parse as parsedate
 from datetime import datetime
@@ -54,9 +56,21 @@ class Poll(object):
 		self.xml = etree.parse(xmlf)
 
 		def get_settings(self, node):
+			if node.find(ns + "title") is not None:
+				self.title = node.find(ns + "title").text
+			else:
+				raise AttributeError("No title!")
+
+			if node.find(ns + "id") is not None:
+				self.id = node.find(ns + "id").text
+			else:
+				raise AttributeError("No id!")
+
 			if node.find(ns + "opening-date") is not None:
 				self.opening = parsedate(node.find(ns + "opening-date").text)
-			
+			else:
+				self.opening = None
+
 			if node.find(ns + "closing-date") is not None:
 				self.closing = parsedate(node.find(ns + "closing-date").text)
 			else:
@@ -68,7 +82,11 @@ class Poll(object):
 				raise AttributeError("No template file!")
 			
 			if node.find(ns + "user-file") is not None:
-				self.users = get_users_xml_from_csv(node.find(ns + "user-file").text)
+				fn = "%s.users.xml" % self.id
+				if os.path.exists(fn):
+					self.users = etree.parse(fn)
+				else:
+					self.users = get_users_xml_from_csv(node.find(ns + "user-file").text)
 			else:
 				raise AttributeError("No users file!")
 
@@ -84,9 +102,11 @@ class Poll(object):
 		return self.closing == None or (datetime.now() > self.opening and \
 				datetime.now() < self.closing)
 
-	def has_uuid(self, uuid_hex):
-		return True
-		#return len(self.users.xpath("/users/user/uuid[.='%s']" % uuid_hex)) > 0
-
-	def make_cache(self):
-		pass
+	def has_user(self, uuid_hex):
+		print(uuid_hex)
+		res = self.users.xpath("/a:users/a:user/a:uuid[.='%s']" % uuid_hex, 
+			namespaces={'a': XMLNS['users']})
+		print(res)
+		#return True
+		# XXX: works but stubbed for testing
+		return len(res) > 0
